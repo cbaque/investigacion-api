@@ -58,7 +58,6 @@ class UserController extends Controller
                 'password' => 'required',
                 'role' => 'required',
                 'position' => 'required',
-                'departament' => 'required',
             ]);
 
             $newPeople = new People();
