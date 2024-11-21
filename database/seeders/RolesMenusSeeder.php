@@ -16,6 +16,7 @@ class RolesMenusSeeder extends Seeder
      */
     public function run(): void
     {
+        // administrador todas las opciones
         $role = Role::where('name', 'admin')->first();
         $menu = Menu::all();
 
@@ -27,5 +28,32 @@ class RolesMenusSeeder extends Seeder
                 ],
             );            
         }
+
+        // reseacher solo investigacion
+        $role = Role::where('name', 'researcher')->first();
+        $menu = Menu::where('name', 'Investigación')->get();
+
+        foreach ($menu as $key => $value) {
+            RoleHasMenu::create(
+                [
+                    'role_id' => $role->id,
+                    'menu_id' => $value->id
+                ],
+            );            
+        }
+
+        // scientist solo cientifico
+        $role = Role::where('name', 'scientist')->first();
+        $menu = Menu::where('name', 'Científico')->get();
+        
+        foreach ($menu as $key => $value) {
+            RoleHasMenu::create(
+                [
+                    'role_id' => $role->id,
+                    'menu_id' => $value->id
+                ],
+            );            
+        }
+
     }
 }
