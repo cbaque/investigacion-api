@@ -29,5 +29,15 @@ class ResearchArticlesMembers extends Model
         'created_at',
         'updated_at',
         'deleted_at'
-    ];       
+    ];  
+    
+    public function article()
+    {
+        return $this->belongsTo(ResearchArticles::class, 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

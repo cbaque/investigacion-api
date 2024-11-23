@@ -38,4 +38,9 @@ class ResearchArticles extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function members()
+    {
+        return $this->hasMany(ResearchArticlesMembers::class, 'research_article_id');
+    }
 }
