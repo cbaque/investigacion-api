@@ -55,5 +55,17 @@ class RolesMenusSeeder extends Seeder
             );            
         }
 
+        $role = Role::where('name', 'linkage')->first();
+        $menu = Menu::where('name', 'Vinculacion')->get();
+        
+        foreach ($menu as $key => $value) {
+            RoleHasMenu::create(
+                [
+                    'role_id' => $role->id,
+                    'menu_id' => $value->id
+                ],
+            );            
+        }
+
     }
 }

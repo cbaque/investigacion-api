@@ -36,6 +36,24 @@ class UserSeeder extends Seeder
         ]);  
         $roleAdmin = Role::where('name', 'admin')->first();
         $userAdmin->assignRole($roleAdmin);
+
+        $personLinkage = People::create([
+            'name' => "John Guambo",
+            'dni' => "09999999999",
+            'phone' => '099999999',
+            'address' => '',
+            'email' => '',
+        ]);
+
+        $userLinkage = User::create([
+            'name' => "John Guambo",
+            'email' => "guambojhon@gmail.com",
+            'password' => Hash::make('3033561'),
+            'business_id' => $business->id,
+            'people_id' => $personLinkage->id
+        ]);  
+        $roleLinkage = Role::where('name', 'admin')->first();
+        $userLinkage->assignRole($roleLinkage);
         //  FIN USUARIO ADMINISTRADOR
         
         

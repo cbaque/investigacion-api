@@ -29,5 +29,8 @@ class RolesPermisosSeeder extends Seeder
 
         $role = Role::create(['name' => 'scientist', 'description' => 'Cientifico']);
         $role->givePermissionTo(Permission::all());
+
+        $role = Role::create(['name' => 'linkage', 'description' => 'Vinculacion']);
+        $role->givePermissionTo(Permission::all());
     }
 }

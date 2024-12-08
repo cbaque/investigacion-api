@@ -65,17 +65,6 @@ class RolesUserLevelsSeeder extends Seeder
             );            
         }
 
-        $role = Role::whereIn('name', ['monitor1', 'monitor2'])->get();
-        $userLevel = UserLevel::where('name', 'Monitor')->first();
-
-        foreach ($role as $key => $value) {
-            RoleHasUserLevel::create(
-                [
-                    'role_id' => $value->id,
-                    'user_level_id' => $userLevel->id
-                ],
-            );            
-        }
 
 
     }

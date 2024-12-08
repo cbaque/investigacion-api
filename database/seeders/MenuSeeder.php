@@ -30,6 +30,16 @@ class MenuSeeder extends Seeder
                 'tab' => true,
                 'selected' => true
             ],
+        );  
+        
+        Menu::create(
+            [
+                'name' => "Vinculacion",
+                'link' => "linkage",
+                'icon' => "profile",
+                'tab' => true,
+                'selected' => true
+            ],
         );   
         
         Menu::create(
