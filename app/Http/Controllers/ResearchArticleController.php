@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Models\ResearchArticles;
 use App\Models\ResearchArticlesMembers;
+use App\Models\ResearchArticlesBudgets;
+use App\Models\People;
+use App\Models\User;
+use App\Models\Business;
 
 class ResearchArticleController extends Controller
 {
@@ -47,14 +52,14 @@ class ResearchArticleController extends Controller
         try {
 
             $user = auth()->user();
+            $userBusiness = Business::find($user->business_id);
 
             $data = $request->validate([
                 'code' => 'required',
                 'name_project' => 'required',
                 'faculty' => 'required',
                 'rcu' => 'required',
-                'status' => 'required',
-                'advance' => 'required'
+                'status' => 'required'
             ]);
 
             $newData = new ResearchArticles();
@@ -63,20 +68,42 @@ class ResearchArticleController extends Controller
             $newData->faculty = $request->faculty;
             $newData->rcu = $request->rcu;
             $newData->status = $request->status;
-            $newData->advance = $request->advance;
             $newData->impact = $request->impact;
-            $newData->observation = $request->observation;
             $newData->duration = $request->duration;
-            $newData->budget_one = $request->budget_one;
-            $newData->budget_two = $request->budget_two;
-            $newData->budget_three = $request->budget_three;
+            $newData->date_ini = $request->date_ini;
+            $newData->date_end = $request->date_end;
+            $newData->advance = 0;
+            // $newData->observation = null;
             $newData->save();
+            
+            foreach ($request->budgets as $budget) {
+                ResearchArticlesBudgets::create([
+                    'research_article_id' => $newData->id,
+                    'year' => $budget['date'],
+                    'amount' => $budget['value'],
+                ]);
+            }
 
-            $members = $request->input('members', []);
-            foreach ($members as $memberId) {
+            foreach ($request->members as $member) {
+
+                $newPeople = new People();
+                $newPeople->name = $member['name'];
+                $newPeople->dni = $member['dni'];
+                $newPeople->email = $member['email'];
+                $newPeople->position = $member['departament'];
+                $newPeople->save();
+
+                $newUser = new User();
+                $newUser->name = $member['name'];
+                $newUser->email = $member['email'];
+                $newUser->password = Hash::make($member['dni']);
+                $newUser->business_id = $userBusiness->id;
+                $newUser->people_id = $newPeople->id;
+                $newUser->save();
+
                 ResearchArticlesMembers::create([
                     'research_article_id' => $newData->id,
-                    'user_id' => $memberId
+                    'user_id' => $newUser->id
                 ]);
             }
 

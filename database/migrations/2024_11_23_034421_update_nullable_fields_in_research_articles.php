@@ -18,11 +18,6 @@ return new class extends Migration
             $table->string('budget_one')->nullable()->change();
             $table->string('budget_two')->nullable()->change();
             $table->string('budget_three')->nullable()->change();
-
-            $table->dropColumn('date_ini');
-            $table->dropColumn('date_end');
-
-
         });
     }
 
@@ -38,9 +33,6 @@ return new class extends Migration
             $table->string('budget_one')->nullable()->change();
             $table->string('budget_two')->nullable()->change();
             $table->string('budget_three')->nullable()->change();
-                
-            $table->dropColumn('date_ini');
-            $table->dropColumn('date_end');
         });
     }
 };
