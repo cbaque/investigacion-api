@@ -7,8 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\ResearchArticles;
 
-class ResearchArticleAdvanceController extends Controller
+class ResearchArticleClosingController extends Controller
 {
+
     /**
      * Update the specified resource in storage.
      */
@@ -17,18 +18,17 @@ class ResearchArticleAdvanceController extends Controller
         DB::beginTransaction();
 
         try {
-
             $user = auth()->user();
             $research = ResearchArticles::find($id);
             if (!$research) {
                 return response_data([], Response::HTTP_BAD_REQUEST, 'Proyecto no encontrado', false);
             }
 
-            $research->advance = $request->advance;
+            $research->status = $request->status;
             $research->save();
 
             DB::commit();
-            return response_data($research, Response::HTTP_CREATED, 'Avance actualizado correctamente...', true);
+            return response_data($research, Response::HTTP_CREATED, 'Proyecto Finalizado correctamente...', true);
         } catch (\Exception $ex) {
             DB::rollBack();
             return response_data(null, Response::HTTP_BAD_REQUEST , $ex->getMessage() );

@@ -11,6 +11,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\ResearchArticleController;
 use App\Http\Controllers\ResearchArticleAdvanceController;
+use App\Http\Controllers\ResearchArticleClosingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,6 @@ Route::group(['middleware' => ['auth:api'] ], function () {
     Route::resource('mode', ModeController::class);
     Route::resource('research', ResearchArticleController::class);
     Route::resource('research/advance', ResearchArticleAdvanceController::class);
+    Route::resource('research/closing', ResearchArticleClosingController::class);
 });
 
