@@ -10,6 +10,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\ResearchArticleController;
+use App\Http\Controllers\ResearchArticleAdvanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,6 @@ Route::group(['middleware' => ['auth:api'] ], function () {
     Route::resource('departament', DepartamentController::class);
     Route::resource('mode', ModeController::class);
     Route::resource('research', ResearchArticleController::class);
+    Route::resource('research/advance', ResearchArticleAdvanceController::class);
 });
+
