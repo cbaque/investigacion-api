@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('screens', function (Blueprint $table) {
+        Schema::create('linkage_calls', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string("name");
+            $table->date("date_ini")->nullable();
+            $table->date("date_end")->nullable();
+            $table->boolean("status")->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('screens');
+        Schema::dropIfExists('linkage_calls');
     }
 };

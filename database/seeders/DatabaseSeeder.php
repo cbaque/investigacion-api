@@ -18,12 +18,6 @@ class DatabaseSeeder extends Seeder
             RolesMenusSeeder::class,
             BusinesSeeder::class,
             UserSeeder::class,
-            // DepartamentSeeder::class,
-            // StateSeeder::class,
-            // UserLevelSeeder::class,
-            // RolesUserLevelsSeeder::class,
-            // ModesSeeder::class,
-            // ScreenSeeder::class
         ]);
     }
 }

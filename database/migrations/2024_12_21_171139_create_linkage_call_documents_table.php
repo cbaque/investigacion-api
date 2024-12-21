@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('states', function (Blueprint $table) {
+        Schema::create('linkage_call_documents', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('icon');
-            $table->string('color');
+            $table->string("name");
+            $table->string("path");
+            $table->boolean("status")->default(true);
+            $table->unsignedBigInteger('linkage_call_id');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('linkage_call_id')->references('id')->on('linkage_calls');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('states');
+        Schema::dropIfExists('linkage_call_documents');
     }
 };
