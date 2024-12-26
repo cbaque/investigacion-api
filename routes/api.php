@@ -13,6 +13,7 @@ use App\Http\Controllers\ResearchArticleController;
 use App\Http\Controllers\ResearchArticleAdvanceController;
 use App\Http\Controllers\ResearchArticleClosingController;
 use App\Http\Controllers\ResearchArticleUploadDocController;
+use App\Http\Controllers\LinkageCallController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +46,7 @@ Route::group(['middleware' => ['auth:api'] ], function () {
     Route::resource('research/advance', ResearchArticleAdvanceController::class);
     Route::resource('research/closing', ResearchArticleClosingController::class);
     Route::resource('research/upload', ResearchArticleUploadDocController::class);
+
+    Route::resource('linkagecall', LinkageCallController::class);
 });
 
